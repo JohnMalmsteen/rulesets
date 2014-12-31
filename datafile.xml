@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='us-ascii'?>
+
+<!-- some sample data to work with for our prototype -->
+
+<rule-set>
+	<!-- trigger list goes here -->
+	<triggers>
+		<trigger name="row-updated"></trigger>
+		<trigger name="time-elapsed"></trigger>
+	</triggers>
+
+	<!-- available actions list goes here -->
+	<actions>
+		<action name="amber_cooling_times_event"></action>
+		<action name="amber_sleep_interval_event"></action>
+		<action name="red_cooling_times_event"></action>
+		<action name="red_sleep_interval_event"></action>
+		<action name="red_corretive_action"></action>
+	</actions>
+
+	<meta-data>
+		<table-name name="sample-table">
+			<column-name name="sleepStart" type="TIME" lowBound="0" highBound="24.61"></column-name>
+			<column-name name="sleepEnd" type="TIME" lowBound="0" highBound="24.61"></column-name>
+			<column-name name="CoolingEndTime" type="TIME" lowBound="0" highBound="24.61"></column-name>
+			<column-name name="CookingEndTime" type="TIME" lowBound="0" highBound="24.61"></column-name>
+			<column-name name="StartDate" type="DATE"></column-name>
+			<column-name name="EndDate" type="DATE"></column-name>
+		</table-name>
+	</meta-data>
+
+</rule-set>
