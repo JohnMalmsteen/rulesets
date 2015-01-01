@@ -129,24 +129,25 @@ function createInnerOperatorList(){
 
   $("drop-area").append(fitem);
 
-  for(each elem in optionsArray){
+  jQuery.each(optionsArray, function(index, item)
+  {
     var operatorOption = $(document.createElement("option")).attr({
                                                                     id: "operatorOption" + i,
-                                                                    value: elem
+                                                                    value: item
                                                                   });
 
     $("#conditionalSelectorInternal"+c).append(operatorOption);
 
     var theOption = document.getElementById("actionOption" + i);
-    theOption.innerHTML = elem;
+    theOption.innerHTML = item;
 
     i++;
 
-  }
+  });
 
   c++;
 
-}
+};
 
 i=0;
 
@@ -159,24 +160,26 @@ function createOuterOperatorList(){
 
   $("drop-area").append(fitem);
 
-  for(each elem in optionsArray){
+  jQuery.each(optionsArray, function(index, item)
+  {
     var operatorOption = $(document.createElement("option")).attr({
                                                                     id: "operatorOption" + i,
-                                                                    value: elem
+                                                                    value: item
                                                                   });
 
     $("#conditionalSelectorInternal"+c).append(operatorOption);
 
     var theOption = document.getElementById("actionOption" + i);
-    theOption.innerHTML = elem;
+    theOption.innerHTML = item;
 
     i++;
 
-  }
+  });
 
   Oc++;
 
-}
+};
+
 
 /*
     Conditional list for column when conditions:
