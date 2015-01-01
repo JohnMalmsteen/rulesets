@@ -16,16 +16,32 @@
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+    #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+    </style>
+
+    <script>
+      $(function() {
+        $( "#droppable" ).droppable({
+          drop: function( event, ui )
+           {
+            //drop event here
+           }
+        });
+      });
+  </script>
 
 </head>
 
@@ -46,7 +62,7 @@
                 <a class="navbar-brand" href="index.html">Rule Generator</a>
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse" >
+            <div>
                 <ul class="nav navbar-nav side-nav" id="columnsList">
                     <!-- here is where the generated column names go -->
                 </ul>
@@ -57,10 +73,19 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
+    
+            <form>
+            <label>Enter your rule name here: </label>
+            <input type="text" id="id_rules" value="" class="span3"></input> 
+            </form>
 
-
+            <div id="droppable" class="ui-widget-header" style="width:100%;height:500px"></div>
 
             </div>
+
+           
+           <div id="results"></div>
+
             <!-- /.container-fluid -->
 
         </div>
