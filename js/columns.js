@@ -56,6 +56,40 @@ function getColumns(){
               i++;
 
           });
+
+          i = 0;
+
+          jQuery.each(data.triggers, function(index, item)
+          {
+              var triggerOption = $(document.createElement("option")).attr({
+                                                                              id: "triggerOption" + i,
+                                                                              value: item.name
+                                                                            });
+
+              $("#triggerSelect").append(triggerOption);
+
+              var theOption = document.getElementById("triggerOption" + i);
+              theOption.innerHTML = item.name;
+
+              i++;
+          });
+
+          i = 0;
+
+          jQuery.each(data.actions, function(index, item)
+          {
+              var actionOption = $(document.createElement("option")).attr({
+                                                                              id: "actionOption" + i,
+                                                                              value: item.name
+                                                                            });
+
+              $("#actionSelect").append(actionOption);
+
+              var theOption = document.getElementById("actionOption" + i);
+              theOption.innerHTML = item.name;
+
+              i++;
+          });
       },
       error: function(XMLHttpRequest, textStatus, errorThrown)
       {

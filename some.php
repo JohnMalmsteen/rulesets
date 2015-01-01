@@ -10,15 +10,19 @@
                 );
   
  
-  $triggers = array("name"=>"row-updated","name"=>"time-elapsed");
+  $triggers = array(
+                      array("name"=>"row-updated"),
+                      array("name"=>"time-elapsed")
+                      );
   
 
   $actions = array(
-    "name"=>"amber_cooling_times_event",
-    "name"=>"amber_sleep_interval_event",
-    "name"=>"red_cooling_times_event",
-    "name"=>"red_sleep_interval_event",
-    "name"=>"red_corretive_action");
+    array("name" => "amber_cooling_times_event"),
+    array("name" => "amber_sleep_interval_event"),
+    array("name" => "red_cooling_times_event"),
+    array("name" => "red_sleep_interval_event"),
+    array("name" => "red_corretive_action")
+  );
     
   $data = array("columns"=>$columns, "triggers"=>$triggers, "actions"=>$actions); 
 
