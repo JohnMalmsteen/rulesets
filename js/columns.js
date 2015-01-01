@@ -8,6 +8,11 @@ function getColumns(){
       {
           var i = 0;
 
+          var columnArea = document.getElementById("columnsList");
+          while (columnArea.firstChild) {
+              columnArea.removeChild(columnArea.firstChild);
+          }
+
           jQuery.each(data.columns, function(index, item)
           {
 
@@ -19,7 +24,6 @@ function getColumns(){
               $("#li" + i).attr("class", "active ui-widget-content");
 
               var theLink = $(document.createElement("a")).attr({
-                                                                  href: "index.html",
                                                                   id: "link" + i
                                                                 });
               $("#li"+i).append(theLink);
@@ -35,6 +39,9 @@ function getColumns(){
                   //$( "#link" + i ).draggable({ grid: [ 20, 20 ] }); //Working
                   
                     $( "#link" + i ).draggable({
+                          drag: function(event, ui) {
+                              $(this).attr("onclick", "getColumns()");
+                          },
                           revert : function(event, ui) {
                               // on older version of jQuery use "draggable"
                               // $(this).data("draggable")
@@ -44,6 +51,7 @@ function getColumns(){
                                   top : 0,
                                   left : 0
                               };
+
                               // return boolean
                               return !event;
                               // that evaluate like this:
