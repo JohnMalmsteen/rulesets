@@ -119,6 +119,65 @@ function AjaxColumns() {
  return result;
 }
 
+var c = 0;
+i =0;
+
+function createInnerOperatorList(){
+  var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
+
+  var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+c);
+
+  $("drop-area").append(fitem);
+
+  for(each elem in optionsArray){
+    var operatorOption = $(document.createElement("option")).attr({
+                                                                    id: "operatorOption" + i,
+                                                                    value: elem
+                                                                  });
+
+    $("#conditionalSelectorInternal"+c).append(operatorOption);
+
+    var theOption = document.getElementById("actionOption" + i);
+    theOption.innerHTML = elem;
+
+    i++;
+
+  }
+
+  c++;
+
+}
+
+i=0;
+
+var Oc = 0;
+
+function createOuterOperatorList(){
+  var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
+
+  var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+Oc);
+
+  $("drop-area").append(fitem);
+
+  for(each elem in optionsArray){
+    var operatorOption = $(document.createElement("option")).attr({
+                                                                    id: "operatorOption" + i,
+                                                                    value: elem
+                                                                  });
+
+    $("#conditionalSelectorInternal"+c).append(operatorOption);
+
+    var theOption = document.getElementById("actionOption" + i);
+    theOption.innerHTML = elem;
+
+    i++;
+
+  }
+
+  Oc++;
+
+}
+
 /*
     Conditional list for column when conditions:
 
