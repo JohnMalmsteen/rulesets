@@ -6,6 +6,23 @@
 
 /* Global Styles */
 
+.cond_select
+{   
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#droppable 
+{ 
+  background-color: green;
+  width: 235px;
+  height: 55px;
+  padding: 0.5em;
+  float: left;
+  margin: 10px;
+}
+
 /*Our CSS*/
 
 .snap { 

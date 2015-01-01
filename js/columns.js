@@ -134,6 +134,7 @@ function createInnerOperatorList(){
   var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
 
   var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+c);
+  fitem.addClass("cond_select");
 
   $("#drop-area").append(fitem);
 
