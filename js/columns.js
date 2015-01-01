@@ -127,7 +127,7 @@ function createInnerOperatorList(){
 
   var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+c);
 
-  $("drop-area").append(fitem);
+  $("#drop-area").append(fitem);
 
   jQuery.each(optionsArray, function(index, item)
   {
@@ -138,7 +138,7 @@ function createInnerOperatorList(){
 
     $("#conditionalSelectorInternal"+c).append(operatorOption);
 
-    var theOption = document.getElementById("actionOption" + i);
+    var theOption = document.getElementById("operatorOption" + i);
     theOption.innerHTML = item;
 
     i++;
@@ -158,7 +158,7 @@ function createOuterOperatorList(){
 
   var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+Oc);
 
-  $("drop-area").append(fitem);
+  $("#drop-area").append(fitem);
 
   jQuery.each(optionsArray, function(index, item)
   {
@@ -167,9 +167,9 @@ function createOuterOperatorList(){
                                                                     value: item
                                                                   });
 
-    $("#conditionalSelectorInternal"+c).append(operatorOption);
+    $("#conditionalSelectorInternal"+Oc).append(operatorOption);
 
-    var theOption = document.getElementById("actionOption" + i);
+    var theOption = document.getElementById("operatorOption" + i);
     theOption.innerHTML = item;
 
     i++;
