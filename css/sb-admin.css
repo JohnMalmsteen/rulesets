@@ -6,11 +6,10 @@
 
 /* Global Styles */
 
-.cond_select
-{   
-    text-align: center;
-    font-size: 18px;
-    margin-top: 20px;
+.liQ
+{
+    padding-left:40px;
+    padding-top:20px;
 }
 
 #droppable 
@@ -19,13 +18,19 @@
   width: 235px;
   height: 55px;
   padding: 0.5em;
-  float: left;
-  margin: 10px;
+  margin: 30px;
+  padding: 20px;
+  float:left;
 }
 
-/*Our CSS*/
+.cond_select
+{   
+    text-align: center;
+    font-size: 16px;
+}
 
-.snap { 
+.snap 
+{ 
     width: 300px; 
     height: 100px; 
     margin-bottom: 25px;

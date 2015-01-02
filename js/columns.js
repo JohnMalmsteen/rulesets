@@ -56,7 +56,8 @@ function getColumns(initialbool){
                           },
                           helper: "clone",
                           containment:"document",
-                          revert : function(event, ui) {
+                          revert : function(event, ui)
+                          {
                               // on older version of jQuery use "draggable"
                               // $(this).data("draggable")
                               // on 2.x versions of jQuery use "ui-draggable"
@@ -72,6 +73,7 @@ function getColumns(initialbool){
                               // return event !== false ? false : true;
                           }
                       });
+
                       $("#droppable").droppable();
                   });
 
@@ -152,15 +154,21 @@ function AjaxColumns() {
 }
 
 var c = 0;
+var x = 0;
 i =0;
 
 function createInnerOperatorList(){
   var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
 
+  var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+  $("#queryList").append(listWrap);  
+
   var fitem = $(document.createElement("select")).attr({id: "conditionalSelectorInternal"+c, onchange: "operatorChanged()"});
   fitem.addClass("cond_select");
 
-  $("#drop-area").append(fitem);
+  $("#query-list-item"+x).append(fitem);
+
+  ++x;
 
   var operatorOption = $(document.createElement("option")).attr({
                                                                      id: "operatorOption" + i,
@@ -231,10 +239,12 @@ function createOuterOperatorList(){
 
 };
 
-function operatorChanged(){
-  var newDrop = $(document.createElement("div")).attr("class", "ui-widget-header ui-droppable");
-  newDrop.attr("id", "droppable");  
-  $("#drop-area").append(newDrop);
-
+function operatorChanged()
+{/*
+  var newDrop = $(document.createElement("li"));
+  newDrop.attr("id", "droppable"); 
+  newDrop.attr("class","ui-widget-header ui-droppable");
+  $("#queryList").append(newDrop);
+  */
 };
 
