@@ -34,8 +34,11 @@
           drop: function(event, ui )
            {            
             createInnerOperatorList();
-            $(ui.feature.draggable).removeClass("draggable");
-
+            //ui.draggable.detach().appendTo($(this));
+            //$(ui.feature.draggable).removeClass("draggable");
+            var elem = ui.draggable;
+            getColumns(false);
+            elem.appendTo($(this));
            }
         });
       });
@@ -43,7 +46,7 @@
 
 </head>
 
-<body onload="getColumns()">
+<body onload="getColumns(true)">
 
     <div id="wrapper">
 

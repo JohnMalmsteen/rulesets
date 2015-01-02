@@ -1,4 +1,4 @@
-function getColumns(){
+function getColumns(initialbool){
 
  var promise = $.ajax(
  {
@@ -21,7 +21,7 @@ function getColumns(){
               $("#columnsList").append(fitem);
               //var theItem = document.getElementById('li' + i);
               //theItem.innerHTML = "Item " + i;
-              $("#li" + i).attr("class", "active ui-widget-content");
+              $("#li" + i).attr("class", "active draggable ui-widget-content");
 
               var theLink = $(document.createElement("a")).attr({
                                                                   id: "link" + i
@@ -31,7 +31,19 @@ function getColumns(){
               var theItem = document.getElementById('link'+i);
               theItem.innerHTML = item.name;
 
-              var theIm = $(document.createElement("i")).attr("class", "fa fa-fw fa-clock-o draggable ui-widget-content");
+              var imageString;
+
+              if(item.type.toUpperCase() == "TIME"){
+                imageString = "fa-clock-o";
+              }
+              else if (item.type.toUpperCase() == "DATE"){
+                imageString = "fa-calendar-o";
+              }
+              else{
+                imageString = "fa-meh-o";
+              }
+
+              var theIm = $(document.createElement("i")).attr("class", "fa fa-fw " + imageString + " ui-widget-content");
               $("#li"+ i + " a").prepend(theIm);
 
               $(function() 
@@ -40,8 +52,10 @@ function getColumns(){
                   
                     $( "#link" + i ).draggable({
                           drag: function(event, ui) {
-                              $(this).attr("onclick", "getColumns()");
+                              
                           },
+                          helper: "clone",
+                          containment:"document",
                           revert : function(event, ui) {
                               // on older version of jQuery use "draggable"
                               // $(this).data("draggable")
@@ -65,52 +79,62 @@ function getColumns(){
 
           });
 
-          i = 0;
+          if(initialbool){
+          
+            var triggerOption = $(document.createElement("option")).attr({
+                                                                            id: "triggerOption0", 
+                                                                            value: "null"
+                                                                          });
 
-          jQuery.each(data.triggers, function(index, item)
-          {
-              var triggerOption = $(document.createElement("option")).attr({
-                                                                              id: "triggerOption" + i,
-                                                                              value: item.name
-                                                                            });
+            $("#triggerSelect").append(triggerOption);
 
-              $("#triggerSelect").append(triggerOption);
+            i = 1;
 
-              var theOption = document.getElementById("triggerOption" + i);
-              theOption.innerHTML = item.name;
+            jQuery.each(data.triggers, function(index, item)
+            {
+                var triggerOption = $(document.createElement("option")).attr({
+                                                                                id: "triggerOption" + i,
+                                                                                value: item.name
+                                                                              });
 
-              i++;
-          });
+                $("#triggerSelect").append(triggerOption);
 
-          i = 0;
+                var theOption = document.getElementById("triggerOption" + i);
+                theOption.innerHTML = item.name;
 
-          jQuery.each(data.actions, function(index, item)
-          {
-              var actionOption = $(document.createElement("option")).attr({
-                                                                              id: "actionOption" + i,
-                                                                              value: item.name
-                                                                            });
+                i++;
+            });
 
-              $("#actionSelect").append(actionOption);
+            var actionOption = $(document.createElement("option")).attr({
+                                                                            id: "actionOption0", 
+                                                                            value: "null"
+                                                                          });
 
-              var theOption = document.getElementById("actionOption" + i);
-              theOption.innerHTML = item.name;
+            $("#actionSelect").append(actionOption);
 
-              i++;
-          });
+            i = 1;
+
+            jQuery.each(data.actions, function(index, item)
+            {
+                var actionOption = $(document.createElement("option")).attr({
+                                                                                id: "actionOption" + i,
+                                                                                value: item.name
+                                                                              });
+
+                $("#actionSelect").append(actionOption);
+
+                var theOption = document.getElementById("actionOption" + i);
+                theOption.innerHTML = item.name;
+
+                i++;
+            });
+          }
       },
       error: function(XMLHttpRequest, textStatus, errorThrown)
       {
           alert("Badness");
       }
   });
-
-  for(var i = 0; i < 10; i++)
-    {
-     
-
-    }
-
 }
 
 
@@ -133,14 +157,23 @@ i =0;
 function createInnerOperatorList(){
   var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
 
-  var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+c);
+  var fitem = $(document.createElement("select")).attr({id: "conditionalSelectorInternal"+c, onchange: "operatorChanged()"});
   fitem.addClass("cond_select");
 
   $("#drop-area").append(fitem);
 
+  var operatorOption = $(document.createElement("option")).attr({
+                                                                     id: "operatorOption" + i,
+                                                                     value: "null"   
+                                                                  });
+
+  $("#conditionalSelectorInternal"+c).append(operatorOption);
+
+  i++;
+
   jQuery.each(optionsArray, function(index, item)
   {
-    var operatorOption = $(document.createElement("option")).attr({
+    operatorOption = $(document.createElement("option")).attr({
                                                                     id: "operatorOption" + i,
                                                                     value: item
                                                                   });
@@ -165,13 +198,22 @@ var Oc = 0;
 function createOuterOperatorList(){
   var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
-  var fitem = $(document.createElement("select")).attr("id", "conditionalSelectorInternal"+Oc);
+  var fitem = $(document.createElement("select")).attr({id: "conditionalSelectorInternal"+Oc, onchange: "operatorChanged()"});
 
   $("#drop-area").append(fitem);
 
+  var operatorOption = $(document.createElement("option")).attr({
+                                                                     id: "operatorOption" + i,
+                                                                     value: "null"   
+                                                                  });
+
+  $("#conditionalSelectorInternal"+c).append(operatorOption);
+
+  i++;
+
   jQuery.each(optionsArray, function(index, item)
   {
-    var operatorOption = $(document.createElement("option")).attr({
+    operatorOption = $(document.createElement("option")).attr({
                                                                     id: "operatorOption" + i,
                                                                     value: item
                                                                   });
@@ -189,32 +231,10 @@ function createOuterOperatorList(){
 
 };
 
+function operatorChanged(){
+  var newDrop = $(document.createElement("div")).attr("class", "ui-widget-header ui-droppable");
+  newDrop.attr("id", "droppable");  
+  $("#drop-area").append(newDrop);
 
-/*
-    Conditional list for column when conditions:
+};
 
-      +
-      -
-      /
-      *
-      is not blank
-      is blank
-      <
-      >
-      <=
-      >=
-      !=
-      ==
-      %
-
-      Alternate conditional:
-
-      AND
-      OR
-      FINISHED
-      +
-      /
-      -
-      *
-      %
-*/

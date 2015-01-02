@@ -15,7 +15,7 @@
 
 #droppable 
 { 
-  background-color: green;
+  background-color: #777777;
   width: 235px;
   height: 55px;
   padding: 0.5em;
@@ -175,6 +175,17 @@ ul.alert-dropdown {
 }
 
 .side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+#droppable>a{
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+#droppable>a:hover{
     color: #fff;
 }
 
