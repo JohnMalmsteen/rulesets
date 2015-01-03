@@ -1,4 +1,18 @@
-function getColumns(initialbool){
+var initBool = true;
+
+function init()
+{
+  if(initBool)
+  {
+    var e = document.getElementById("droppable");
+    $("#droppable").attr('class','drop-unlock-color');
+    initBool = false;
+  }
+}
+
+function getColumns(initialbool)
+{
+ init();
 
  var promise = $.ajax(
  {
@@ -7,15 +21,15 @@ function getColumns(initialbool){
       success: function(data) 
       {
           var i = 0;
-
           var columnArea = document.getElementById("columnsList");
-          while (columnArea.firstChild) {
+          
+          while (columnArea.firstChild) 
+          {
               columnArea.removeChild(columnArea.firstChild);
           }
 
           jQuery.each(data.columns, function(index, item)
           {
-
               //alert(JSON.stringify(item));
               var fitem = $(document.createElement("li")).attr("id", "li"+i);
               $("#columnsList").append(fitem);
@@ -186,12 +200,12 @@ function createInnerOperatorList(){
 
 };
 
-$(function() {
-  $( "#droppable" ).droppable({
+$(function() 
+{
+  $( "#droppable" ).droppable(
+  {
      drop: function(event, ui )
-     {    
-
-
+     {
       var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
       $("#queryList").append(listWrap);  
 
@@ -202,7 +216,8 @@ $(function() {
       x++;
 
       createInnerOperatorList();
-      
+    
+      $("#droppable").attr('class','drop-lock-color');
       $("#droppable").droppable('option', 'disabled', true);
 
       //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or 
@@ -212,6 +227,7 @@ $(function() {
 });
 
 i = 0;
+
 function operatorChanged()
 {
   var selectedValue = $("#conditionalSelector option:selected").val();
@@ -227,6 +243,6 @@ function operatorChanged()
   var theListItem = document.getElementById("selected" + i);
   theListItem.innerHTML = selectedValue;
 
+  $("#droppable").attr('class','drop-unlock-color');
   $("#droppable").droppable('option', 'disabled', false);
 };
-

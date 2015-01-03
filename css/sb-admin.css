@@ -6,21 +6,31 @@
 
 /* Global Styles */
 
-.liQ
+.drop-unlock-color
 {
-    padding-left:40px;
-    padding-top:20px;
+  background-color: #777777;    
 }
 
-#droppable 
+.drop-lock-color
+{
+  background-color: #7A0216;    
+}
+
+#droppable
 { 
-  background-color: #777777;
   width: 235px;
   height: 55px;
   padding: 0.5em;
   margin: 30px;
+  margin-bottom: 90%;
   padding: 20px;
   float:left;
+}
+
+.liQ
+{
+    padding-top:20px;
+    list-style-type:none;
 }
 
 .cond_select
