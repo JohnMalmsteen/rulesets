@@ -57,7 +57,7 @@ function getColumns(initialbool)
                 imageString = "fa-meh-o";
               }
 
-              var theIm = $(document.createElement("i")).attr("class", "fa fa-fw " + imageString + " ui-widget-content");
+              var theIm = $(document.createElement("i")).attr("class", "fa fa-fw " + imageString + " ui-widget-content").attr("id", "image");
               $("#li"+ i + " a").prepend(theIm);
 
               $(function() 
@@ -207,11 +207,11 @@ $(function()
      drop: function(event, ui )
      {
       var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
-      $("#queryList").append(listWrap);  
-
-      var elem = ui.draggable;
+      $("#queryList").append(listWrap);
+      var elem = $(ui.draggable)[0].childNodes[1].nodeValue;
+      //var elem = ui.draggable;
       getColumns(false);
-      elem.appendTo($("#query-list-item"+x));
+      $("#query-list-item"+x).append(elem);
 
       x++;
 
