@@ -95,8 +95,8 @@ function getColumns(initialbool)
 
           });
 
-          if(initialbool){
-          
+          if(initialbool)
+          {          
             var triggerOption = $(document.createElement("option")).attr({
                                                                             id: "triggerOption0", 
                                                                             value: "null"
@@ -157,11 +157,24 @@ var c = 0;
 var x = 0;
 i =0;
 
-function createInnerOperatorList(){
+function createInnerOperatorList()
+{
   var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
   //var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+  
+  /*
+     Debug Zone of Terror
+  */
+
+  $('#queryList').cron();
+
+  /*
+     Debug Zone of Terror
+  */
+
+
   $("#queryList").append(listWrap);  
 
   var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
@@ -246,3 +259,4 @@ function operatorChanged()
   $("#droppable").attr('class','drop-unlock-color');
   $("#droppable").droppable('option', 'disabled', false);
 };
+

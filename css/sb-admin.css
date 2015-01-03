@@ -1,10 +1,9 @@
-/*!
- * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+/*Our CSS*/
 
-/* Global Styles */
+select
+{
+  margin: 5px 5px 5px 5px;
+}
 
 .drop-unlock-color
 {
@@ -14,17 +13,6 @@
 .drop-lock-color
 {
   background-color: #7A0216;    
-}
-
-#droppable
-{ 
-  width: 235px;
-  height: 55px;
-  padding: 0.5em;
-  margin: 30px;
-  margin-bottom: 90%;
-  padding: 20px;
-  float:left;
 }
 
 .liQ
@@ -44,6 +32,17 @@
     width: 300px; 
     height: 100px; 
     margin-bottom: 25px;
+}
+
+#droppable
+{ 
+  width: 235px;
+  height: 55px;
+  padding: 0.5em;
+  margin: 30px;
+  margin-bottom: 90%;
+  padding: 20px;
+  float:left;
 }
 
 /*Our CSS*/
