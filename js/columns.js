@@ -139,31 +139,18 @@ function getColumns(initialbool){
   });
 }
 
-
-function AjaxColumns() {
-  var result="";
-  $.ajax({
-    dataType: 'json',
-    url:"some.php",
-    async: false,
-    success:function(data) {
-       result = data;
-    }
- });
- return result;
-}
-
 var c = 0;
 var x = 0;
 i =0;
 
 function createInnerOperatorList(){
   var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
+  //var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
   $("#queryList").append(listWrap);  
 
-  var fitem = $(document.createElement("select")).attr({id: "conditionalSelectorInternal"+c, onchange: "operatorChanged()"});
+  var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
   fitem.addClass("cond_select");
 
   $("#query-list-item"+x).append(fitem);
@@ -175,7 +162,7 @@ function createInnerOperatorList(){
                                                                      value: "null"   
                                                                   });
 
-  $("#conditionalSelectorInternal"+c).append(operatorOption);
+  $("#conditionalSelector").append(operatorOption);
 
   i++;
 
@@ -186,7 +173,7 @@ function createInnerOperatorList(){
                                                                     value: item
                                                                   });
 
-    $("#conditionalSelectorInternal"+c).append(operatorOption);
+    $("#conditionalSelector").append(operatorOption);
 
     var theOption = document.getElementById("operatorOption" + i);
     theOption.innerHTML = item;
@@ -199,52 +186,47 @@ function createInnerOperatorList(){
 
 };
 
-i=0;
+$(function() {
+  $( "#droppable" ).droppable({
+     drop: function(event, ui )
+     {    
 
-var Oc = 0;
 
-function createOuterOperatorList(){
-  var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
+      var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+      $("#queryList").append(listWrap);  
 
-  var fitem = $(document.createElement("select")).attr({id: "conditionalSelectorInternal"+Oc, onchange: "operatorChanged()"});
+      var elem = ui.draggable;
+      getColumns(false);
+      elem.appendTo($("#query-list-item"+x));
 
-  $("#drop-area").append(fitem);
+      x++;
 
-  var operatorOption = $(document.createElement("option")).attr({
-                                                                     id: "operatorOption" + i,
-                                                                     value: "null"   
-                                                                  });
+      createInnerOperatorList();
+      
+      $("#droppable").droppable('option', 'disabled', true);
 
-  $("#conditionalSelectorInternal"+c).append(operatorOption);
-
-  i++;
-
-  jQuery.each(optionsArray, function(index, item)
-  {
-    operatorOption = $(document.createElement("option")).attr({
-                                                                    id: "operatorOption" + i,
-                                                                    value: item
-                                                                  });
-
-    $("#conditionalSelectorInternal"+Oc).append(operatorOption);
-
-    var theOption = document.getElementById("operatorOption" + i);
-    theOption.innerHTML = item;
-
-    i++;
-
+      //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or 
+      //inner html of the droppable to indicate that it is no longer accepting drops and the user should select an operator from the selector
+     }
   });
+});
 
-  Oc++;
-
-};
-
+i = 0;
 function operatorChanged()
-{/*
-  var newDrop = $(document.createElement("li"));
-  newDrop.attr("id", "droppable"); 
-  newDrop.attr("class","ui-widget-header ui-droppable");
-  $("#queryList").append(newDrop);
-  */
+{
+  var selectedValue = $("#conditionalSelector option:selected").val();
+  var parent = $("#conditionalSelector").parentNode;
+  $("#conditionalSelector").remove();
+
+  var theSelectedOperator = $(document.createElement("a")).attr({
+                                                                  id: "selected" + i
+                                                                })
+
+  $("#query-list-item" + (x-1)).append(theSelectedOperator);
+
+  var theListItem = document.getElementById("selected" + i);
+  theListItem.innerHTML = selectedValue;
+
+  $("#droppable").droppable('option', 'disabled', false);
 };
 

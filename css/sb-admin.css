@@ -183,15 +183,15 @@ ul.alert-dropdown {
     color: #fff;
 }
 
-#droppable>a{
+#queryList>li>a{
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
-    color: #999;
+    color: #222222;
 }
 
-#droppable>a:hover{
-    color: #fff;
+#queryList>li>a:hover{
+    color: #000000;
 }
 
 /* Flot Chart Containers */
