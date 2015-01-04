@@ -1,4 +1,5 @@
 var initBool = true;
+var outerOperatorBool = false;
 
 function init()
 {
@@ -157,24 +158,17 @@ var c = 0;
 var x = 0;
 i =0;
 
-function createInnerOperatorList()
-{
-  var optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
+function createInnerOperatorList(){
+  var optionsArray;
+
+  if(!outerOperatorBool){
+    optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
+  }else{
+    optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
+  }
   //var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
-  
-  /*
-     Debug Zone of Terror
-  */
-
-  $('#queryList').cron();
-
-  /*
-     Debug Zone of Terror
-  */
-
-
   $("#queryList").append(listWrap);  
 
   var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
@@ -247,16 +241,25 @@ function operatorChanged()
   var parent = $("#conditionalSelector").parentNode;
   $("#conditionalSelector").remove();
 
-  var theSelectedOperator = $(document.createElement("a")).attr({
-                                                                  id: "selected" + i
-                                                                })
-
-  $("#query-list-item" + (x-1)).append(theSelectedOperator);
-
-  var theListItem = document.getElementById("selected" + i);
-  theListItem.innerHTML = selectedValue;
+  $("#query-list-item" + (x-1)).append(selectedValue);
 
   $("#droppable").attr('class','drop-unlock-color');
   $("#droppable").droppable('option', 'disabled', false);
+
+  if(selectedValue == "is blank" || selectedValue == "is not blank")
+  {
+    outerOperatorBool = true;
+    createInnerOperatorList();
+    outerOperatorBool = false;
+
+  }
+
+  if(selectedValue == "<" || selectedValue == ">" || selectedValue == "==" || selectedValue == "<=" || selectedValue == ">="){
+    outerOperatorBool = true;
+  }
+
+  if(selectedValue == "AND" || selectedValue == "OR"){
+    outerOperatorBool = false;
+  }
 };
 
