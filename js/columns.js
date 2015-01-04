@@ -116,9 +116,9 @@ function getColumns(initialbool)
                                                                                 id: "triggerOption" + i,
                                                                                 value: item.name
                                                                               });
-
-                $("#triggerSelect").append(triggerOption);
-
+  
+                $("#triggerSelect").append(triggerOption);                         
+               
                 var theOption = document.getElementById("triggerOption" + i);
                 theOption.innerHTML = item.name;
 
@@ -176,20 +176,11 @@ function createInnerOperatorList()
   //var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
-  
-  /*
-  Debug Zone of Terror
-  */
-
-  $('#queryList').cron();
-
-  /*
-   Debug Zone of Terror
-  */
 
   $("#queryList").append(listWrap);  
 
-  var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
+  var fitem = $(document.createElement("select")).attr({id: "conditionalSelector"});
+
   fitem.addClass("cond_select");
 
   $("#query-list-item"+x).append(fitem);
@@ -284,4 +275,23 @@ function operatorChanged()
     outerOperatorBool = false;
   }
 };
+
+function triggerChanged(val)
+{
+  // This will have to be controlled though?
+  // Placeholder
+
+  /*
+  Debug Zone of Terror
+  */
+
+  if(val.value.toUpperCase().indexOf("TIME") >= 0)
+  {
+      $('#queryList').cron();
+  }  
+
+  /*
+   Debug Zone of Terror
+  */
+}
 
