@@ -12,7 +12,7 @@ select
 
 .drop-lock-color
 {
-  background-color: #7A0216;    
+  background-color: #7A0216;  
 }
 
 .liQ
@@ -41,8 +41,16 @@ select
   padding: 0.5em;
   margin: 30px;
   margin-bottom: 90%;
-  padding: 20px;
+  padding: 10px;
   float:left;
+  text-align: center;
+  font-weight: bold;
+  color:white; 
+  text-shadow:
+  1px 1px 0 #000,
+  1px 1px 0 #000,
+  1px 1px 0 #000,
+  1px 1px 0 #000; 
 }
 
 /*Our CSS*/

@@ -7,6 +7,7 @@ function init()
   {
     var e = document.getElementById("droppable");
     $("#droppable").attr('class','drop-unlock-color');
+    $("#droppable").empty().append('<p>Dropping enabled, Please select a column.</p>');
     initBool = false;
   }
 }
@@ -35,7 +36,9 @@ function getColumns(initialbool)
               var fitem = $(document.createElement("li")).attr("id", "li"+i);
               $("#columnsList").append(fitem);
               //var theItem = document.getElementById('li' + i);
-              //theItem.innerHTML = "Item " + i;
+              //theItem.innerHTML = "Item " + i;       
+
+
               $("#li" + i).attr("class", "active draggable ui-widget-content");
 
               var theLink = $(document.createElement("a")).attr({
@@ -158,17 +161,32 @@ var c = 0;
 var x = 0;
 i =0;
 
-function createInnerOperatorList(){
+function createInnerOperatorList()
+{
   var optionsArray;
 
-  if(!outerOperatorBool){
+  if(!outerOperatorBool)
+  {
     optionsArray = ['+', '-', '/', '*', '%', 'is blank', 'is not blank', '<', '>', '<=', '<=', '!=', '=='];
-  }else{
+  }
+  else
+  {
     optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
   }
   //var optionsArray = ['+', '-', '/', '*', '%', 'AND', 'OR', 'FINISHED'];
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+  
+  /*
+  Debug Zone of Terror
+  */
+
+  $('#queryList').cron();
+
+  /*
+   Debug Zone of Terror
+  */
+
   $("#queryList").append(listWrap);  
 
   var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
@@ -225,6 +243,7 @@ $(function()
       createInnerOperatorList();
     
       $("#droppable").attr('class','drop-lock-color');
+      $("#droppable").empty().append('<p>Dropping disabled, Please select operator.</p>');
       $("#droppable").droppable('option', 'disabled', true);
 
       //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or 
@@ -244,6 +263,7 @@ function operatorChanged()
   $("#query-list-item" + (x-1)).append(selectedValue);
 
   $("#droppable").attr('class','drop-unlock-color');
+  $("#droppable").empty().append('<p>Dropping enabled, Please select a column.</p>');
   $("#droppable").droppable('option', 'disabled', false);
 
   if(selectedValue == "is blank" || selectedValue == "is not blank")
@@ -254,11 +274,13 @@ function operatorChanged()
 
   }
 
-  if(selectedValue == "<" || selectedValue == ">" || selectedValue == "==" || selectedValue == "<=" || selectedValue == ">="){
+  if(selectedValue == "<" || selectedValue == ">" || selectedValue == "==" || selectedValue == "<=" || selectedValue == ">=")
+  {
     outerOperatorBool = true;
   }
 
-  if(selectedValue == "AND" || selectedValue == "OR"){
+  if(selectedValue == "AND" || selectedValue == "OR")
+  {
     outerOperatorBool = false;
   }
 };
