@@ -179,7 +179,7 @@ function createInnerOperatorList()
 
   $("#queryList").append(listWrap);  
 
-  var fitem = $(document.createElement("select")).attr({id: "conditionalSelector"});
+  var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
 
   fitem.addClass("cond_select");
 
