@@ -5,6 +5,12 @@ select
   margin: 5px 5px 5px 5px;
 }
 
+button
+{
+    margin-top: 14px;
+    margin-right: 14px;
+}
+
 .drop-unlock-color
 {
   background-color: #777777;    
@@ -40,7 +46,7 @@ select
   height: 55px;
   padding: 0.5em;
   margin: 30px;
-  margin-bottom: 90%;
+  margin-bottom: 40%;
   padding: 10px;
   float:left;
   text-align: center;
@@ -57,7 +63,7 @@ select
 
 body {
     margin-top: 100px;
-    background-color: #222;
+    background-color: #fff;
 }
 
 @media(min-width:768px) {
@@ -172,6 +178,7 @@ ul.alert-dropdown {
         border-radius: 0;
         overflow-y: visible;
         background-color: #222;
+        height: 100%;
     }
 
     .side-nav>li>a {
