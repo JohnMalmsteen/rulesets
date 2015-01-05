@@ -283,7 +283,7 @@ function operatorChanged()
 
     var listItems = $("#queryList");
     var ifString = "";
-    
+
     jQuery.each($("#queryList li"), function(index, item){
       ifString += $(item).text();
       ifString += " ";
@@ -304,7 +304,7 @@ function triggerChanged(val)
 
   if(val.value.toUpperCase().indexOf("TIME") >= 0)
   {
-      $('#queryList').cron();
+      $('#triggerArea').cron();
   }  
 
   /*
