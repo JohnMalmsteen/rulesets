@@ -225,8 +225,10 @@ $(function()
       var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
       $("#queryList").append(listWrap);
       var elem = $(ui.draggable)[0].childNodes[1].nodeValue;
+
       //var elem = ui.draggable;
       getColumns(false);
+    
       $("#query-list-item"+x).append(elem);
 
       x++;
@@ -251,7 +253,9 @@ function operatorChanged()
   var parent = $("#conditionalSelector").parentNode;
   $("#conditionalSelector").remove();
 
-  $("#query-list-item" + (x-1)).append(selectedValue);
+  if(selectedValue != "FINISHED"){
+    $("#query-list-item" + (x-1)).append(selectedValue);
+  }
 
   $("#droppable").attr('class','drop-unlock-color');
   $("#droppable").empty().append('<p>Drag & Drop a Column Here</p>');
