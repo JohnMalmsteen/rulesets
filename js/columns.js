@@ -7,7 +7,7 @@ function init()
   {
     var e = document.getElementById("droppable");
     $("#droppable").attr('class','drop-unlock-color');
-    $("#droppable").empty().append('<p>Dropping enabled, Please select a column.</p>');
+    $("#droppable").empty().append('<p>Drag & Drop a Column Here</p>');
     initBool = false;
   }
 }
@@ -254,7 +254,7 @@ function operatorChanged()
   $("#query-list-item" + (x-1)).append(selectedValue);
 
   $("#droppable").attr('class','drop-unlock-color');
-  $("#droppable").empty().append('<p>Dropping enabled, Please select a column.</p>');
+  $("#droppable").empty().append('<p>Drag & Drop a Column Here</p>');
   $("#droppable").droppable('option', 'disabled', false);
 
   if(selectedValue == "is blank" || selectedValue == "is not blank")
@@ -273,6 +273,23 @@ function operatorChanged()
   if(selectedValue == "AND" || selectedValue == "OR")
   {
     outerOperatorBool = false;
+  }
+
+  if(selectedValue == "FINISHED")
+  {
+      $("#droppable").attr('class','drop-lock-color');
+      $("#droppable").empty().append('<p>Dropping disabled, Rule Composition Finished</p>');
+      $("#droppable").droppable('option', 'disabled', true);
+
+    var listItems = $("#queryList");
+    var ifString = "";
+    
+    jQuery.each($("#queryList li"), function(index, item){
+      ifString += $(item).text();
+      ifString += " ";
+    });
+
+    alert(ifString);
   }
 };
 
