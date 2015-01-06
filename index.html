@@ -69,8 +69,9 @@
 
         <div id="page-wrapper">
 
-            <div id="drop-area" class="container-fluid">
+            <div id="drop-area" class="container">
     
+                <div>
                 <form class="form-inline">
                     <div class="form-group">
                         <label>Rule Name: </label>
@@ -87,44 +88,41 @@
                         </select>
                     </div>
                 </form>
+                </div>
+            </div>
+
+            <div class="container">
 
                 <ul id="triggerArea"></ul>
 
-                <div class="container">
-                    <div class="row clearfix">
-                        
-                        <div class="col-md-6 column">
+                    <div class="row">                        
+                           
+                            <div class="col-xs-12">
+                               
+                               <div class="col-xs-6 col-md-6">
 
-                            <div id="droppable" class="ui-widget-header">
-                            </div>
-                                
-                            <div style="margin: 20px;padding: 10px;">
-                               <input>
-                               <input type="button" value="Submit">
-                           </div>
+                                   <div id="droppable" class="ui-widget-header"></div>
 
-                        </div>
+                                   <div class="col-xs-12">                                    
+                                       <label>Append Numerical</label>
+                                       <form class="form-inline">
+                                           <input>
+                                           <input type="button" value="Submit" style="margin:5px">
+                                       </form>
+                                   </div>
+
+                               </div><!--    -->
                         
-                        <div class="col-md-6 column">
-                            
-                            <div>
+                              <div class="col-xs-6 col-md-6">  
                                 <ul id="queryList" class="liQ list-group">
                                     <li>IF: </li>
-                                </ul>                
-                            </div>                            
+                                </ul>                    
+                              </div>
 
-                        </div>
-
+                           </div>
                     </div>
-
                 </div>
-                                 
-               </div>
-            <!-- /.container-fluid -->
-
-
         </div>
-        <!-- /#page-wrapper -->
         
     </div>
     <!-- /#wrapper -->
