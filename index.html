@@ -68,60 +68,57 @@
         </nav>
 
         <div id="page-wrapper">
-
-            <div id="drop-area" class="container">
-    
-                <div>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label>Rule Name: </label>
-                        <input type="text" id="id_rules" value="" class="span3"></input> 
-                    </div>
-                    <div class="form-group">
-                        <label>Trigger: </label>
-                        <select id="triggerSelect" onchange="triggerChanged(this)">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Event: </label>
-                        <select id="actionSelect">
-                        </select>
-                    </div>
-                </form>
+            <div id="drop-area">
+                <div class="row container">
+                    <form class="form-inline" style="margin-left:10px">
+                        <div class="form-group">
+                            <label>Rule Name: </label>
+                            <input type="text" id="id_rules" value="" class="span3"></input> 
+                        </div>
+                        <div class="form-group">
+                            <label>Trigger: </label>
+                            <select id="triggerSelect" onchange="triggerChanged(this)">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Event: </label>
+                            <select id="actionSelect">
+                            </select>
+                        </div>
+                    </form>
                 </div>
-            </div>
-
-            <div class="container">
+            </div>            
 
                 <ul id="triggerArea"></ul>
 
-                    <div class="row">                        
-                           
-                            <div class="col-xs-12">
-                               
-                               <div class="col-xs-6 col-md-6">
+                    <div class="row">                 
+                        <div class="col-xs-12">
+                           <div class="col-xs-6 col-md-6">
 
-                                   <div id="droppable" class="ui-widget-header"></div>
+                               <div id="droppable" class="ui-widget-header"></div>
 
-                                   <div class="col-xs-12">                                    
-                                       <label>Append Numerical</label>
-                                       <form class="form-inline">
-                                           <input>
-                                           <input type="button" value="Submit" style="margin:5px">
-                                       </form>
-                                   </div>
+                               <div class="col-xs-12">                                    
+                                   <label>Append Numerical</label>
+                                   <form class="form-inline">
+                                       <input>
+                                       <input type="button" value="Submit">
+                                   </form>
+                               </div>
 
-                               </div><!--    -->
-                        
+                           </div><!--    -->
+                            
+                          <div>  
                               <div class="col-xs-6 col-md-6">  
-                                <ul id="queryList" class="liQ list-group">
-                                    <li>IF: </li>
-                                </ul>                    
+                                    <ul id="queryList" class="liQ list-group">
+                                        <li>IF: </li>
+                                    </ul>                    
                               </div>
+                          </div>
 
-                           </div>
+                        </div>
                     </div>
                 </div>
+
         </div>
         
     </div>
