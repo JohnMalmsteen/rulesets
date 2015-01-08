@@ -331,18 +331,18 @@ function triggerChanged(val)
   {
       var myOptions =
       {
-          val1 : 'Year',
-          val2 : 'Month',
-          val3 : 'Week',
-          val4 : 'Day',
-          val5 : 'Hour',
-          val6 : 'Minute'
+          val1 : 'Year(s)',
+          val2 : 'Month(s)',
+          val3 : 'Week(s)',
+          val4 : 'Day(s)',
+          val5 : 'Hour(s)',
+          val6 : 'Minute(s)'
       };
 
       var mySelect = $('#triggerArea');
       var mytpick;
 
-      mySelect.append("<input id='numeral' value='0' type=number style='width:80px;margin:4px'>");
+      mySelect.append("<input id='numeral' value='0'  min='0' type=number style='width:80px;margin:4px'>");
 
       mySelect.append("<select id='tpick'>");
 
