@@ -298,10 +298,7 @@ function operatorChanged()
 };
 
 function triggerChanged(val)
-{
-  // This will have to be controlled though?
-  // Placeholder
-
+{  
   /*
   Debug Zone of Terror
   */
@@ -315,4 +312,3 @@ function triggerChanged(val)
    Debug Zone of Terror
   */
 }
-

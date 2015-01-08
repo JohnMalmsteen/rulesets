@@ -306,7 +306,7 @@
             }
 
             block["period"] = $("<span class='cron-period'>"
-                    + "Every <select name='cron-period'>" + custom_periods
+                    + "Every <input id='numeral' type=number style='width:80px;margin:4px'> time(s). Every <select name='cron-period'>" + custom_periods
                     + str_opt_period + "</select> </span>")
                 .appendTo(this)
                 .data("root", this);
