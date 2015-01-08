@@ -2,6 +2,7 @@ var initBool = true;
 var outerOperatorBool = false;
 var conditionalFinished = false;
 var cron_str = "";
+var cron_eng_str = "";
 
 function init()
 {
@@ -323,10 +324,6 @@ function getConditional(){
 
 function triggerChanged(val)
 {  
-  /*
-  Debug Zone of Terror
-  */
-
   if(val.value.toUpperCase().indexOf("EVERY-[X]-TIME") >= 0)
   {
       var myOptions =
@@ -339,10 +336,11 @@ function triggerChanged(val)
           val6 : 'Minute(s)'
       };
 
-      var mySelect = $('#triggerArea');
+      var mySelect = $('#triggerwrap');
       var mytpick;
 
-      mySelect.append("<input id='numeral' value='0'  min='0' type=number style='width:80px;margin:4px'>");
+      mySelect.append("<label>every-[x]-time</label><br>");
+      mySelect.append("<input id='numeral' value='0' min='0' type=number style='width:80px;'>");
 
       mySelect.append("<select id='tpick'>");
 
@@ -355,10 +353,6 @@ function triggerChanged(val)
 
       mySelect.append('</select>');  
   }  
-
-  /*
-   Debug Zone of Terror
-  */
 }
 
 function appendNumerical()
@@ -421,40 +415,59 @@ function submitRule()
 
     var temp;
 
-    if(pickval == "Year")
+    if(pickval == "Year(s)")
     {
         var currentdate = new Date();
         temp = currentdate.getYear(); 
         temp  = currentdate + "/" + numeral; 
+        
         cron_str = "* * * * * * " + temp;
+
+        cron_eng_str = "every " + numeral + " years";
     }
-    else if(pickval == "Month")
+    else if(pickval == "Month(s)")
     {
         temp  = "*/" + numeral;
+
         cron_str = "* * " + temp + " * *";
+
+        cron_eng_str = "every " + numeral + " months";
     }
-    else if(pickval == "Week")
+    else if(pickval == "Week(s)")
     {
         temp  = "*/" + numeral;
+
         cron_str = "* * * " + temp + " *";
+
+        cron_eng_str = "every " + numeral + " weeks";
     }
-    else if(pickval == "Day")
+    else if(pickval == "Day(s)")
     {
         temp  = "*/" + numeral;
+
         cron_str = "* * " + temp + " * *";
+
+        cron_eng_str = "every " + numeral + " days";
     }
-    else if(pickval == "Hour")
+    else if(pickval == "Hour(s)")
     {
         temp  = "*/" + numeral;
+
         cron_str = "* " + temp + " * * *";
+
+        cron_eng_str = "every " + numeral + " hours";
     }
-    else if(pickval == "Minute")
+    else if(pickval == "Minute(s)")
     {
         temp  = "*/" + numeral;
+
         cron_str = temp + " * * * *" ;
+
+        cron_eng_str = "every " + numeral + " minutes";
     }     
 
     alert(cron_str);
+    alert(cron_eng_str);
 
     /*    
     Cron String 
