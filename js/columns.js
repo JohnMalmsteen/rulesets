@@ -1,6 +1,7 @@
 var initBool = true;
 var outerOperatorBool = false;
 var conditionalFinished = false;
+var cron_str = "";
 
 function init()
 {
@@ -326,9 +327,33 @@ function triggerChanged(val)
   Debug Zone of Terror
   */
 
-  if(val.value.toUpperCase().indexOf("TIME") >= 0)
+  if(val.value.toUpperCase().indexOf("EVERY-[X]-TIME") >= 0)
   {
-      $('#triggerArea').cron();
+      var myOptions =
+      {
+          val1 : 'Year',
+          val2 : 'Month',
+          val3 : 'Week',
+          val4 : 'Day',
+          val5 : 'Hour',
+          val6 : 'Minute'
+      };
+
+      var mySelect = $('#triggerArea');
+      var mytpick;
+
+      mySelect.append("<input id='numeral' value='0' type=number style='width:80px;margin:4px'>");
+
+      mySelect.append("<select id='tpick'>");
+
+      mytpick = $('#tpick');
+
+      $.each(myOptions, function(val, text) 
+      {
+          mytpick.append($('<option></option>').val(val).html(text));
+      }); 
+
+      mySelect.append('</select>');  
   }  
 
   /*
@@ -386,7 +411,57 @@ function submitRule()
     var ruleString = "Rule: " + ruleName + " Begin\n\t" + "Trigger: " + triggerName 
     + "\n\t" + "if ((" + conditional + "), " + actionName + ") end\nEnd";
     alert(ruleString);
+
+    /*    
+    Cron String 
+    */
+
+    var pickval = $("#tpick").find(":selected").text();
+    var numeral = $("#numeral").val();
+
+    var temp;
+
+    if(pickval == "Year")
+    {
+        var currentdate = new Date();
+        temp = currentdate.getYear(); 
+        temp  = currentdate + "/" + numeral; 
+        cron_str = "* * * * * * " + temp;
+    }
+    else if(pickval == "Month")
+    {
+        temp  = "*/" + numeral;
+        cron_str = "* * " + temp + " * *";
+    }
+    else if(pickval == "Week")
+    {
+        temp  = "*/" + numeral;
+        cron_str = "* * * " + temp + " *";
+    }
+    else if(pickval == "Day")
+    {
+        temp  = "*/" + numeral;
+        cron_str = "* * " + temp + " * *";
+    }
+    else if(pickval == "Hour")
+    {
+        temp  = "*/" + numeral;
+        cron_str = "* " + temp + " * * *";
+    }
+    else if(pickval == "Minute")
+    {
+        temp  = "*/" + numeral;
+        cron_str = temp + " * * * *" ;
+    }     
+
+    alert(cron_str);
+
+    /*    
+    Cron String 
+    */
+
   }
+
 }
 
 
