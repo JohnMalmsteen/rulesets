@@ -57,7 +57,7 @@
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <ul class="nav navbar-right top-nav">
-                <li><button type="button">Submit</button></li>
+                <li><button type="button" onclick="submitRule()" value="Submit">Submit</button></li>
             </ul>
             <div>
                 <ul class="nav navbar-nav side-nav" id="columnsList">
@@ -73,7 +73,7 @@
                     <form class="form-inline" style="margin-left:10px">
                         <div class="form-group">
                             <label>Rule Name: </label>
-                            <input type="text" id="id_rules" value="" class="span3"></input> 
+                            <input type="text" id="ruleName" class="span3"></input> 
                         </div>
                         <div class="form-group">
                             <label>Trigger: </label>
@@ -100,8 +100,8 @@
                                <div class="col-xs-12">                                    
                                    <label>Append Numerical</label>
                                    <form class="form-inline">
-                                       <input>
-                                       <input type="button" value="Submit">
+                                       <input type="number" min="0" id="numericalInput" value="0">
+                                       <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
                                    </form>
                                </div>
 
@@ -110,7 +110,6 @@
                           <div>  
                               <div class="col-xs-6 col-md-6">  
                                     <ul id="queryList" class="liQ list-group">
-                                        <li>IF: </li>
                                     </ul>                    
                               </div>
                           </div>

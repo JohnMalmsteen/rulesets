@@ -1,5 +1,6 @@
 var initBool = true;
 var outerOperatorBool = false;
+var conditionalFinished = false;
 
 function init()
 {
@@ -239,6 +240,9 @@ $(function()
       $("#droppable").empty().append('<p>Dropping disabled, Please select operator.</p>');
       $("#droppable").droppable('option', 'disabled', true);
 
+      var button = document.getElementById("appendNumericalButton");
+      button.disabled = true;
+
       //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or 
       //inner html of the droppable to indicate that it is no longer accepting drops and the user should select an operator from the selector
      }
@@ -261,11 +265,20 @@ function operatorChanged()
   $("#droppable").empty().append('<p>Drag & Drop a Column Here</p>');
   $("#droppable").droppable('option', 'disabled', false);
 
+  var button = document.getElementById("appendNumericalButton");
+  button.disabled = false;
+
   if(selectedValue == "is blank" || selectedValue == "is not blank")
   {
     outerOperatorBool = true;
     createInnerOperatorList();
     outerOperatorBool = false;
+
+    $("#droppable").attr('class','drop-lock-color');
+    $("#droppable").empty().append('<p>Dropping disabled, Please select operator.</p>');
+    $("#droppable").droppable('option', 'disabled', true);
+
+    button.disabled = true;
 
   }
 
@@ -281,11 +294,22 @@ function operatorChanged()
 
   if(selectedValue == "FINISHED")
   {
-      $("#droppable").attr('class','drop-lock-color');
-      $("#droppable").empty().append('<p>Dropping disabled, Rule Composition Finished</p>');
-      $("#droppable").droppable('option', 'disabled', true);
+    $("#droppable").attr('class','drop-lock-color');
+    $("#droppable").empty().append('<p>Dropping disabled, Rule Composition Finished</p>');
+    $("#droppable").droppable('option', 'disabled', true);
+
+    var button = document.getElementById("appendNumericalButton");
+    button.disabled = true;
 
     var listItems = $("#queryList");
+
+    conditionalFinished = true;
+
+  }
+
+};
+
+function getConditional(){
     var ifString = "";
 
     jQuery.each($("#queryList li"), function(index, item){
@@ -293,9 +317,8 @@ function operatorChanged()
       ifString += " ";
     });
 
-    alert(ifString);
-  }
-};
+    return ifString;
+}
 
 function triggerChanged(val)
 {  
@@ -312,3 +335,63 @@ function triggerChanged(val)
    Debug Zone of Terror
   */
 }
+
+function appendNumerical()
+{
+  var numerical = document.getElementById("numericalInput").value;
+
+  var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+  $("#queryList").append(listWrap);
+
+  $("#query-list-item"+x).append(numerical);
+
+  x++;
+
+  createInnerOperatorList();
+
+  $("#droppable").attr('class','drop-lock-color');
+  $("#droppable").empty().append('<p>Dropping disabled, Please select operator.</p>');
+  $("#droppable").droppable('option', 'disabled', true);
+
+  var button = document.getElementById("appendNumericalButton");
+  button.disabled = true;
+
+}
+
+function submitRule()
+{
+  var ruleName = document.getElementById("ruleName").value;
+  var triggerName = document.getElementById("triggerSelect").value;
+  var actionName = document.getElementById("actionSelect").value;
+  var conditional = getConditional();
+
+  if(ruleName == "")
+  {
+    alert("You must enter a name for your rule");
+  }
+  else if(triggerName == null)
+  {
+    alert("You must select a trigger");
+  }
+  else if(actionName == null)
+  {
+    alert("You must select an action");
+  }
+  else if(conditionalFinished != true)
+  {
+    alert("You must complete your conditional");
+  }
+  else
+  {
+    var ruleString = "Rule: " + ruleName + " Begin\n\t" + "Trigger: " + triggerName 
+    + "\n\t" + "if ((" + conditional + "), " + actionName + ") end\nEnd";
+    alert(ruleString);
+  }
+}
+
+
+
+/*"Rule:" name "Begin"
+  "TRIGGER:" every 10 minutes
+  "if" ((a > b), true, false) "end"
+"End"*/
