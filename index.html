@@ -67,8 +67,9 @@
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" >
 
+            <div class="row" >
             <div id="drop-area">
                 <div class="row container">
                     <form class="form-inline" style="margin-left:10px">
@@ -88,31 +89,39 @@
                         </div>
                     </form>
                 </div>
-            </div>            
-
-
-            <div class="row">                 
-                <div class="col-xs-12">
-                   <div class="col-xs-5 col-md-5">
-          
-                    <div id="triggerwrap">
-                        <ul id="triggerArea"></ul>
-                    </div> 
-
-                   <div id="droppable" class="ui-widget-header"></div>                   
-                       <label>Append Numerical</label>
-                           <form class="form-inline">
-                               <input type="number" min="0" id="numericalInput" value="0">
-                               <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
-                           </form>
-                    </div><!--    -->
-                     
-                    <div class="col-xs-7 col-md-7"> 
-                          <ul id="queryList" class="liQ list-group" style="position:absolute"></ul>
-                    </div>
-                </div>
+            </div> 
             </div>
+
+            <div class="row">
+
+            <table style="margin-left:40px">
+                <tr>
+                    <th>              
+                        <div>
+                            <div id="triggerwrap">
+                                <ul id="triggerArea"></ul>
+                            </div> 
+                        </div>
+
+                        <div id="droppable" class="ui-widget-header"></div>                   
+                            <label>Append Numerical</label>
+                            <form class="form-inline">
+                                <input type="number" min="0" id="numericalInput" value="0">
+                                <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
+                            </form>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div>
+                             <ul id="queryList" class="liQ" style="vertical-align: top;"> </ul>
+                        </div>
+                    </th>            
+                </tr>
+            </table>
+           
         </div>
+</div>
         
     </div>
     <!-- /#wrapper -->

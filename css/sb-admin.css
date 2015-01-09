@@ -11,6 +11,12 @@ button
     margin-right: 14px;
 }
 
+.half 
+{
+    float: left !important;
+    width: 50% !important;
+}
+
 .drop-unlock-color
 {
   background-color: #777777;    
@@ -23,7 +29,7 @@ button
 
 .liQ
 {
-    list-style-type:none;
+    list-style-type:none;x
 }
 
 .cond_select
@@ -41,11 +47,11 @@ button
 
 #droppable
 { 
-  width: 235px;
+  width: 265px;
   height: 55px;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 14px;
   text-align: center;
   font-weight: bold;
   color:white; 
