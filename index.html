@@ -33,8 +33,8 @@
     <!-- REMOVE IF WE DON'T USE THIS
 
     <script type="text/javascript" src="gentleSelect/jquery-gentleSelect.js"></script>
-    <link type="text/css" href="gentleSelect/jquery-gentleSelect.css" rel="stylesheet" /> 
-    
+    <link type="text/css" href="gentleSelect/jquery-gentleSelect.css" rel="stylesheet" />
+
     -->
 
 </head>
@@ -75,35 +75,42 @@
                     <form class="form-inline" style="margin-left:10px">
                         <div class="form-group">
                             <label>Rule Name: </label>
-                            <input type="text" id="ruleName" class="span3"></input> 
+                            <input type="text" id="ruleName" class="span3"></input>
                         </div>
                         <div class="form-group">
                             <label>Trigger: </label>
                             <select id="triggerSelect" onchange="triggerChanged(this)">
                             </select>
                         </div>
+                        <br>
                         <div class="form-group">
-                            <label>Event: </label>
+                            <label>True Event : </label>
                             <select id="actionSelect">
                             </select>
                         </div>
+                        <br>
+                        <div class="form-group">
+                          <label>False Event: </label>
+                          <select id="falseActionSelect">
+                          </select>
+                        </div>
                     </form>
-                    
+
                 </div>
 
-            </div> 
+            </div>
 
-            
+
             </div>
 
             <div class="row">
 
             <table style="margin-left:40px">
                 <tr>
-                    <th>             
-                        <div id="triggerwrap"></div> 
+                    <th>
+                        <div id="triggerwrap"></div>
                         <hr>
-                        <div id="droppable" class="ui-widget-header"></div>                   
+                        <div id="droppable" class="ui-widget-header"></div>
                             <label>Append Numerical</label>
                             <form class="form-inline">
                                 <input type="number" min="0" id="numericalInput" value="0">
@@ -116,13 +123,13 @@
                         <div>
                              <ul id="queryList" class="liQ" style="vertical-align: top;"> </ul>
                         </div>
-                    </th>            
+                    </th>
                 </tr>
             </table>
-           
+
         </div>
 </div>
-        
+
     </div>
     <!-- /#wrapper -->
     <div id="bottom-area"></div>

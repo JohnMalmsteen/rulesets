@@ -22,13 +22,13 @@ function getColumns(initialbool)
  var promise = $.ajax(
  {
       url: "/some.php",
-      dataType: 'json', 
-      success: function(data) 
+      dataType: 'json',
+      success: function(data)
       {
           var i = 0;
           var columnArea = document.getElementById("columnsList");
-          
-          while (columnArea.firstChild) 
+
+          while (columnArea.firstChild)
           {
               columnArea.removeChild(columnArea.firstChild);
           }
@@ -39,7 +39,7 @@ function getColumns(initialbool)
               var fitem = $(document.createElement("li")).attr("id", "li"+i);
               $("#columnsList").append(fitem);
               //var theItem = document.getElementById('li' + i);
-              //theItem.innerHTML = "Item " + i;       
+              //theItem.innerHTML = "Item " + i;
 
 
               $("#li" + i).attr("class", "active draggable ui-widget-content");
@@ -67,13 +67,13 @@ function getColumns(initialbool)
               var theIm = $(document.createElement("i")).attr("class", "fa fa-fw " + imageString + " ui-widget-content").attr("id", "image");
               $("#li"+ i + " a").prepend(theIm);
 
-              $(function() 
+              $(function()
               {
                   //$( "#link" + i ).draggable({ grid: [ 20, 20 ] }); //Working
-                  
+
                     $( "#link" + i ).draggable({
                           drag: function(event, ui) {
-                              
+
                           },
                           helper: "clone",
                           containment:"document",
@@ -103,9 +103,9 @@ function getColumns(initialbool)
           });
 
           if(initialbool)
-          {          
+          {
             var triggerOption = $(document.createElement("option")).attr({
-                                                                            id: "triggerOption0", 
+                                                                            id: "triggerOption0",
                                                                             value: "null"
                                                                           });
 
@@ -119,9 +119,9 @@ function getColumns(initialbool)
                                                                                 id: "triggerOption" + i,
                                                                                 value: item.name
                                                                               });
-  
-                $("#triggerSelect").append(triggerOption);                         
-               
+
+                $("#triggerSelect").append(triggerOption);
+
                 var theOption = document.getElementById("triggerOption" + i);
                 theOption.innerHTML = item.name;
 
@@ -129,12 +129,12 @@ function getColumns(initialbool)
             });
 
             var actionOption = $(document.createElement("option")).attr({
-                                                                            id: "actionOption0", 
+                                                                            id: "actionOption0",
                                                                             value: "null"
                                                                           });
 
             $("#actionSelect").append(actionOption);
-
+            $("#actionOption0").clone().appendTo("#falseActionSelect")
             i = 1;
 
             jQuery.each(data.actions, function(index, item)
@@ -147,7 +147,10 @@ function getColumns(initialbool)
                 $("#actionSelect").append(actionOption);
 
                 var theOption = document.getElementById("actionOption" + i);
+
                 theOption.innerHTML = item.name;
+
+                $("#actionOption" + i).clone().appendTo("#falseActionSelect")
 
                 i++;
             });
@@ -180,7 +183,7 @@ function createInnerOperatorList()
 
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
 
-  $("#queryList").append(listWrap);  
+  $("#queryList").append(listWrap);
 
   var fitem = $(document.createElement("select")).attr({id: "conditionalSelector", onchange: "operatorChanged()"});
 
@@ -192,7 +195,7 @@ function createInnerOperatorList()
 
   var operatorOption = $(document.createElement("option")).attr({
                                                                      id: "operatorOption" + i,
-                                                                     value: "null"   
+                                                                     value: "null"
                                                                   });
 
   $("#conditionalSelector").append(operatorOption);
@@ -219,7 +222,7 @@ function createInnerOperatorList()
 
 };
 
-$(function() 
+$(function()
 {
   $( "#droppable" ).droppable(
   {
@@ -231,13 +234,13 @@ $(function()
 
       //var elem = ui.draggable;
       getColumns(false);
-    
+
       $("#query-list-item"+x).append(elem);
 
       x++;
 
       createInnerOperatorList();
-    
+
       $("#droppable").attr('class','drop-lock-color');
       $("#droppable").empty().append('<p>Dropping disabled, Please select operator.</p>');
       $("#droppable").droppable('option', 'disabled', true);
@@ -245,7 +248,7 @@ $(function()
       var button = document.getElementById("appendNumericalButton");
       button.disabled = true;
 
-      //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or 
+      //this disables the droppable from any further drops until it is turned back on, this should perhaps change the CSS or
       //inner html of the droppable to indicate that it is no longer accepting drops and the user should select an operator from the selector
      }
   });
@@ -323,7 +326,7 @@ function getConditional(){
 }
 
 function triggerChanged(val)
-{  
+{
   if(val.value.toUpperCase().indexOf("EVERY-[X]-TIME") >= 0)
   {
       var myOptions =
@@ -346,13 +349,13 @@ function triggerChanged(val)
 
       mytpick = $('#tpick');
 
-      $.each(myOptions, function(val, text) 
+      $.each(myOptions, function(val, text)
       {
           mytpick.append($('<option></option>').val(val).html(text));
-      }); 
+      });
 
-      mySelect.append('</select>');  
-  }  
+      mySelect.append('</select>');
+  }
 }
 
 function appendNumerical()
@@ -382,6 +385,17 @@ function submitRule()
   var ruleName = document.getElementById("ruleName").value;
   var triggerName = document.getElementById("triggerSelect").value;
   var actionName = document.getElementById("actionSelect").value;
+  var falseAction = document.getElementById("falseActionSelect").value;
+
+  if (falseAction == "null")
+  {
+    falseAction = "";
+  }
+  else
+  {
+    falseAction = ", " + falseAction;
+  }
+
   var conditional = getConditional();
 
   if(triggerName == "every-[x]-time")
@@ -410,8 +424,8 @@ function submitRule()
   }
   else
   {
-    var ruleString = "Rule: " + ruleName + " Begin\n\t" + "Trigger: " + triggerName 
-    + "\n\t" + "if ((" + conditional + "), " + actionName + ") end\nEnd";
+    var ruleString = "Rule: " + ruleName + " Begin\n\t" + "Trigger: " + triggerName
+    + "\n\t" + "if ((" + conditional + "), " + actionName + falseAction + ") end\nEnd";
     alert(ruleString);
 
   }
