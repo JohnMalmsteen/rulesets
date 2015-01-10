@@ -11,6 +11,13 @@ button
     margin-right: 14px;
 }
 
+.hrstyle
+{
+    height:0.1em;
+    border:1px;
+    background-color:#000;    
+}
+
 .formindent
 {
     margin-left: 10px;

@@ -432,8 +432,6 @@ function submitRule()
 
 }
 
-
-
 /*"Rule:" name "Begin"
   "TRIGGER:" every 10 minutes
   "if" ((a > b), true, false) "end"
