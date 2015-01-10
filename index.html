@@ -21,29 +21,13 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="cron/cron/jquery-cron.js"></script>
-    <link type="text/css" href="cron/cron/jquery-cron.css" rel="stylesheet" />
-
-    <!-- REMOVE IF WE DON'T USE THIS
-
-    <script type="text/javascript" src="gentleSelect/jquery-gentleSelect.js"></script>
-    <link type="text/css" href="gentleSelect/jquery-gentleSelect.css" rel="stylesheet" />
-
-    -->
 
 </head>
 
 <body onload="getColumns(true)">
 
     <div id="wrapper">
-
-        <!-- Navigation -->
+        
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -57,85 +41,78 @@
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <ul class="nav navbar-right top-nav">
+                <li><button type="button" value="Reset" onclick="window.location.reload()">Reset</button></li>
                 <li><button type="button" onclick="submitRule()" value="Submit">Submit</button></li>
             </ul>
             <div>
                 <ul class="nav navbar-nav side-nav" id="columnsList">
                     <!-- here is where the generated column names go -->
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+            </div><!-- /.navbar-collapse -->            
+        </nav><!-- Navigation -->
 
         <div id="page-wrapper" >
 
             <div class="row" >
-            <div id="drop-area">
-                <div class="row container">
-                    <form class="form-inline" style="margin-left:10px">
-                        <div class="form-group">
-                            <label>Rule Name: </label>
-                            <input type="text" id="ruleName" class="span3"></input>
-                        </div>
-                        <div class="form-group">
-                            <label>Trigger: </label>
-                            <select id="triggerSelect" onchange="triggerChanged(this)">
-                            </select>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label>True Event : </label>
-                            <select id="actionSelect">
-                            </select>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                          <label>False Event: </label>
-                          <select id="falseActionSelect">
-                          </select>
-                        </div>
-                    </form>
+                <div id="drop-area">
+                    <div class="row container">
+                        <form class="form-inline formindent">
+                            <div class="form-group">
+                                <label>Rule Name: </label>
+                                <input type="text" id="ruleName" class="span3"></input>
+                            </div>
+                            <div class="form-group">
+                                <label>Trigger: </label>
+                                <select id="triggerSelect" onchange="triggerChanged(this)">
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>True Event : </label>
+                                <select id="actionSelect">
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label>False Event: </label>
+                              <select id="falseActionSelect">
+                              </select>
+                            </div>
+                            <div id="triggerwrap"></div>
+                        </form>
 
-                </div>
-
-            </div>
-
-
-            </div>
+                    </div><!-- containter-->
+                </div><!-- droparea-->
+            </div><!-- row-->
 
             <div class="row">
+                
+                <table class="tablestyle">                   
+                    <tr>                        
+                        <th>
+                            <hr>
+                            <div id="droppable" class="ui-widget-header"></div>
+                                <label>Append Numerical</label>
+                                <form class="form-inline">
+                                    <input type="number" min="0" id="numericalInput" value="0">
+                                    <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
+                                </form>
+                            </div>
+                        </th>
 
-            <table style="margin-left:40px">
-                <tr>
-                    <th>
-                        <div id="triggerwrap"></div>
-                        <hr>
-                        <div id="droppable" class="ui-widget-header"></div>
-                            <label>Append Numerical</label>
-                            <form class="form-inline">
-                                <input type="number" min="0" id="numericalInput" value="0">
-                                <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
-                            </form>
-                        </div>
-                    </th>
-
-                    <th>
-                        <div>
-                             <ul id="queryList" class="liQ" style="vertical-align: top;"> </ul>
-                        </div>
-                    </th>
-                </tr>
-            </table>
-
-        </div>
-</div>
-
-    </div>
-    <!-- /#wrapper -->
-    <div id="bottom-area"></div>
+                        <th>
+                            <div>
+                                 <ul id="queryList" class="liQ"> </ul>
+                            </div>
+                        </th>
+                    </tr>
+                </table><!-- Table-->
+            
+            </div><!-- Row-->
+        </div><!-- Page Wrapper -->
+    </div><!-- wrapper -->
+    
     <!-- jQuery -->
-
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="js/columns.js"></script>

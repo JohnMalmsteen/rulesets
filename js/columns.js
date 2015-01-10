@@ -342,7 +342,7 @@ function triggerChanged(val)
       var mySelect = $('#triggerwrap');
       var mytpick;
 
-      mySelect.append("<label>every-[x]-time</label><br>");
+      mySelect.append("<label style='margin-right:5px'>Every: </label>");
       mySelect.append("<input id='numeral' value='0' min='0' type=number style='width:80px;'>");
 
       mySelect.append("<select id='tpick'>");
