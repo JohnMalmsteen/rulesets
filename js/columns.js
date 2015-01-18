@@ -9,6 +9,8 @@ var conditionalFinished = false;
 var cron_str = "";
 var cron_eng_str = "";
 
+var parensBalanced = true;
+
 function init()
 {
   if(initBool)
@@ -359,13 +361,37 @@ function operatorChanged()
 // this function loops through the queryList to build up the conditional and returns it as a string
 function getConditional(){
     var ifString = "";
+    // stack will be used to ensure the parentheses in the conditional statement are balanced
+    var stack = new Array();
+    // push a 'null' value to represent the bottom of the stack
+    stack.push("null");
 
     // pulls out each li element in the queryList
     jQuery.each($("#queryList li"), function(index, item){
       ifString += $(item).text();
       ifString += " ";
+
+      // if the li is a opening bracket it gets pushed to the stack
+      if($(item).text() == "(")
+      {
+        stack.push("(");
+      }
+      else if($(item).text() == ")")
+      {
+        // otherwise the top value from the stack is popped, if the popped value is the null at the bottom then it indicates there
+        // has been more closing brackets than opening brackets which is a syntax error
+        if(stack.pop() == "null")
+        {
+          parensBalanced = false;
+        }
+      }
     });
 
+    // if the stack is at anything other than null then there haven't been enough closing brackets to balance the opening brackets
+    if(stack.pop() != "null")
+    {
+      parensBalanced = false;
+    }
     return ifString;
 }
 
@@ -388,7 +414,7 @@ function triggerChanged(val)
       var mySelect = $('#triggerwrap');
       var mytpick;
 
-      mySelect.append("<label style='margin-right:5px'>Every: </label>");
+      mySelect.append("<label id='eventLabels'>Every: </label>");
       mySelect.append("<input id='numeral' value='0' min='0' type=number style='width:80px;'>");
 
       mySelect.append("<select id='tpick'>");
@@ -402,6 +428,16 @@ function triggerChanged(val)
       });
 
       mySelect.append('</select>');
+  }
+  else
+  {
+    // this else condition removes the time picker elements that pop up for the every x time trigger if the user changes their mind
+    var columnArea = document.getElementById("triggerwrap");
+
+    while (columnArea.firstChild)
+    {
+      columnArea.removeChild(columnArea.firstChild);
+    }
   }
 }
 // this is the function associated with the button "submit" beside the number input and is used for adding numerical values into the conditional expressions
@@ -479,6 +515,10 @@ function submitRule()
   {
     alert("You must complete your conditional");
   }
+  else if(parensBalanced != true)
+  {
+    alert("There is a syntax error with your parentheses (brackets are unbalanced)");
+  }
   else
   {
     // builds the string and alerts it
@@ -489,4 +529,34 @@ function submitRule()
     // this variable can just as easily be ajaxed over to a php script or ruby or whatever else the target may be.
   }
 
+}
+
+function appendParen(openBool)
+{
+
+  var selectedValue;
+
+  if(openBool)
+  {
+    selectedValue = "(";
+  }
+  else
+  {
+    selectedValue = ")";
+  }
+
+  if(document.getElementById("conditionalSelector") == null)
+  {
+    var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
+    $("#queryList").append(listWrap);
+
+    $("#query-list-item" + (x)).append(selectedValue);
+    x++;
+  }
+  else
+  {
+    $("#conditionalSelector").remove();
+    $("#query-list-item" + (x-1)).append(selectedValue);
+    createInnerOperatorList();
+  }
 }

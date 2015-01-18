@@ -25,7 +25,7 @@
 <body onload="getColumns(true)">
 
     <div id="wrapper">
-        
+
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -46,7 +46,7 @@
                 <ul class="nav navbar-nav side-nav" id="columnsList">
                     <!-- here is where the generated column names go -->
                 </ul>
-            </div><!-- /.navbar-collapse -->            
+            </div><!-- /.navbar-collapse -->
         </nav><!-- Navigation -->
 
         <div id="page-wrapper">
@@ -56,26 +56,28 @@
                     <div class="row container">
                         <form class="form-inline formindent">
                             <div class="form-group">
-                                <label>Rule Name: </label>
+                                <label id="eventLabels">Rule Name: </label>
                                 <input type="text" id="ruleName" class="span3"></input>
-                            </div>
-                            <div class="form-group">
-                                <label>Trigger: </label>
-                                <select id="triggerSelect" onchange="triggerChanged(this)">
-                                </select>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label>True Event : </label>
+                                <label id="eventLabels">True Event : </label>
                                 <select id="actionSelect">
                                 </select>
                             </div>
                             <br>
                             <div class="form-group">
-                              <label>False Event: </label>
+                              <label id="eventLabels">False Event: </label>
                               <select id="falseActionSelect">
                               </select>
                             </div>
+                            <br>
+                            <div class="form-group">
+                              <label id="eventLabels">Trigger: </label>
+                              <select id="triggerSelect" onchange="triggerChanged(this)">
+                              </select>
+                            </div>
+                            <br>
                             <div id="triggerwrap"></div>
                         </form>
 
@@ -84,18 +86,22 @@
             </div><!-- row-->
 
             <div class="row">
-                
-                <table class="tablestyle">                   
-                    <tr>                        
+
+                <table class="tablestyle">
+                    <tr>
                         <th>
 
                             <hr class="hrstyle"/><!--Adds all the space below the form-->
-                            
+
                             <div id="droppable" class="ui-widget-header"></div>
                                 <label>Append Numerical</label>
                                 <form class="form-inline">
                                     <input type="number" min="0" id="numericalInput" value="0">
-                                    <input type="button" value="Submit" onclick="appendNumerical()" id="appendNumericalButton">
+                                    <input type="button" value="Append" onclick="appendNumerical()" id="appendNumericalButton">
+                                    <br>
+                                    <input type="button" value="Open Parenthesis" onclick="appendParen(true)" id="appendParenButton">
+                                    <br>
+                                    <input type="button" value="Close Parenthesis" onclick="appendParen(false)" id="appendParenButton">
                                 </form>
                             </div>
                         </th>
@@ -107,11 +113,11 @@
                         </th>
                     </tr>
                 </table><!-- Table-->
-            
+
             </div><!-- Row-->
         </div><!-- Page Wrapper -->
     </div><!-- wrapper -->
-    
+
     <!-- jQuery -->
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

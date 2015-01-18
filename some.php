@@ -1,6 +1,6 @@
 <?php
 
-  $columns =  array( 
+  $columns =  array(
                       array("name" => "sleepStart", "type" => "TIME", "lowBound" => 0, "highBound" => 24.61),
                       array("name" => "sleepEnd", "type" => "TIME", "lowBound" => 0, "highBound" => 24.61),
                       array("name" => "CoolingEndTime", "type" => "TIME", "lowBound" => 0, "highBound" => 24.61),
@@ -8,15 +8,15 @@
                       array("name" => "StartDate", "type" => "DATE"),
                       array("name" => "EndDate", "type" => "DATE")
                    );
-  
- 
+
+
   $triggers = array(
                       array("name"=>"row-updated"),
                       array("name"=>"on-save"),
                       array("name"=>"on-approval"),
                       array("name"=>"every-[x]-time")
                    );
-  
+
 
   $actions = array(
                       array("name" => "amber_cooling_times_event"),
@@ -29,8 +29,9 @@
                       array("name" => "generate_amber_daily_cleaning_schedule_event"),
                       array("name" => "generate_red_daily_cleaning_schedule_event")
                  );
-    
-  $data = array("columns"=>$columns, "triggers"=>$triggers, "actions"=>$actions); 
+
+  // the content of the columns/triggers/actions arrays can be whatever you like as long as they are in the same format.
+  $data = array("columns"=>$columns, "triggers"=>$triggers, "actions"=>$actions);
 
   header('Content-Type: application/json');
 
