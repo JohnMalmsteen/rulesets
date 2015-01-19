@@ -528,7 +528,7 @@ function submitRule()
     var pickval = $("#tpick").find(":selected").text();
     var numeral = $("#numeral").val();
 
-    triggerName = "every " + numeral + " years";
+    triggerName = "every " + numeral + " " + pickval;
   }
 
   // big ugly contional block that enforces rulename, trigger selection, action selection and conditional finished
