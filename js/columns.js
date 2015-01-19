@@ -19,6 +19,34 @@ function init()
     $("#droppable").attr('class','drop-unlock-color');
     $("#droppable").empty().append('<p>Drag & Drop a Column Here</p>');
     initBool = false;
+
+    var myOptions = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'C', 'K'];
+
+    var unitOption = $(document.createElement("option")).attr({
+      id: "unitOption",
+      value: "null"
+    });
+
+    $("#upick").append(unitOption);
+
+    var i = 1;
+
+    jQuery.each(myOptions, function(index, item)
+    {
+      operatorOption = $(document.createElement("option")).attr({
+        id: "unitOption" + i,
+        value: item
+      });
+
+      $("#upick").append(operatorOption);
+
+      var theOption = document.getElementById("unitOption" + i);
+      theOption.innerHTML = item;
+
+      i++;
+
+    });
+
   }
 }
 
@@ -445,7 +473,12 @@ function appendNumerical()
 {
   // selects the value of the number entered
   var numerical = document.getElementById("numericalInput").value;
+  var unit = document.getElementById("upick").value;
 
+  if(unit != "null")
+  {
+    numerical += " " + unit;
+  }
   // as before we create an <li> in the queryList for the new element
   var listWrap = $(document.createElement("li")).attr({id: "query-list-item"+x});
   $("#queryList").append(listWrap);
